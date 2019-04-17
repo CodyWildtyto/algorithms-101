@@ -27,8 +27,10 @@
             }) ;
         console.log("Which program do you want to process?");
         _programList.map( _key => console.log(`[ ${_key} ] ${ (_programDictionary[_key] || {} ).name }`) );
+        console.log("[   ] exit");
         _readline.question("> ", _answer => {
                 _readline.close();
+                if ( !(_answer) || _answer === "exit" ) return console.log(_colorProgram, "Bye!");
                 while ( _programList.length ) {
                     const _key = _programList.shift();
                     const _data = _programDictionary[_key] || {} ;
@@ -53,6 +55,7 @@
                 _readline.question("Base (2): ", _baseNumber => {
                         _readline.close();
                         console.log(__utils.baseConverter(_requestNumber, ( _baseNumber || 2 )));
+                        console.log();
                         _askProgram();
                     } );
             } );
