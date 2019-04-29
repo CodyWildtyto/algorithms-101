@@ -7,6 +7,10 @@
             1: {
                     name: "Base Converter",
                     action: _doBaseConvert
+                },
+            2: {
+                    name: "Hot Potato",
+                    action: _doHotPotato
                 }
         };
     const _colorProgram = "\x1b[44m%s\x1b[0m";
@@ -47,10 +51,7 @@
 
     function _doBaseConvert() {
 
-        const _readline = __readline.createInterface({
-                input: process.stdin,
-                output: process.stdout
-            });
+        const _readline = _getReadlineInterface();
         _readline.question("Number: ", _requestNumber => {
                 _readline.question("Base (2): ", _baseNumber => {
                         _readline.close();
@@ -59,6 +60,42 @@
                         _askProgram();
                     } );
             } );
+
+    }
+
+    function _doHotPotato() {
+
+        const _readline = _getReadlineInterface();
+        const _optionList = [];
+        _askQuestion();
+
+        function _askQuestion() {
+            _readline.question("Add option (Empty for passing): ", _requestOption => {
+                    if ( _requestOption ) {
+                        _optionList.push(_requestOption);
+                        _askQuestion();
+                    } else _askIndex();
+                } );
+        }
+
+        function _askIndex() {
+            console.log(_optionList.toString());
+            _readline.question("Index of the loser: ", _index => {
+                    const _result = __utils.hotPotato(_optionList, _index);
+                    console.log(`O ${ _result }`);
+                    console.log();
+                    _askProgram();
+                } );
+        }
+
+    }
+
+    function _getReadlineInterface() {
+
+        return __readline.createInterface({
+                input: process.stdin,
+                output: process.stdout
+            });
 
     }
 
