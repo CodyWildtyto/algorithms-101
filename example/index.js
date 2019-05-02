@@ -1,7 +1,7 @@
 ( function () {
 
     const __tools = require("./tools");
-    const __utils = require("./utils");
+    const __commands = require("./commands");
 
     const _programList = [{
             name: "Base Converter",
@@ -48,8 +48,9 @@
         const _readline = __tools.readlineInterface();
         _readline.question("Number: ", _requestNumber => {
                 _readline.question("Base (2): ", _baseNumber => {
+                        const _result = __commands.baseConverter(_requestNumber, ( _baseNumber || 2 ));
                         _readline.close();
-                        console.log(__utils.baseConverter(_requestNumber, ( _baseNumber || 2 )));
+                        console.log(_result);
                         console.log();
                         _askProgram();
                     } );
@@ -75,7 +76,7 @@
         function _askIndex() {
             console.log(_optionList.toString());
             _readline.question("Index of the loser: ", _index => {
-                    const _result = __utils.hotPotato(_optionList, _index);
+                    const _result = __commands.hotPotato(_optionList, _index);
                     _readline.close();
                     console.log(`O ${ _result }`);
                     console.log();

@@ -1,7 +1,7 @@
 ( function () {
 
-    const Stack = require("./Stack");
-    const Queue = require("./Queue");
+    const Stack = require("./../Stack");
+    const Queue = require("./../Queue");
 
     module.exports = {
             baseConverter: _performBaseConverter,
